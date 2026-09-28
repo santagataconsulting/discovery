@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salesforce Discovery Questionnaire | Santagata Consulting</title>
+<meta name="description" content="Help us prepare for your Salesforce discovery call.">
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --teal:#0F766E; --teal-dark:#134E4A; --teal-700:#0B5F58; --teal-50:#F0FDFA; --teal-100:#CCFBF1;
+    --ink:#0F172A; --muted:#475569; --line:#E2E8F0; --bg:#F6F8F8; --card:#FFFFFF; --err:#B91C1C;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:Calibri,Carlito,"Segoe UI",system-ui,-apple-system,sans-serif;font-size:17px;line-height:1.5;color:var(--ink);background:var(--bg)}
+  a{color:var(--teal)}
+  .hdr{background:linear-gradient(120deg,var(--teal-dark),var(--teal) 60%,#14B8A6);color:#fff}
+  .hdr-in{max-width:1120px;margin:0 auto;padding:22px 20px 26px;display:flex;align-items:center;gap:14px}
+  .mark{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;font-weight:700;font-size:20px;letter-spacing:.5px;flex:none}
+  .brand{font-weight:700;font-size:19px;letter-spacing:.2px}
+  .brand small{display:block;font-weight:400;font-size:14.5px;opacity:.85}
+  .progress{height:5px;background:rgba(255,255,255,.2)}
+  .progress>div{height:100%;background:#99F6E4;width:0;transition:width .35s ease}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 40px;display:grid;grid-template-columns:250px 1fr;gap:28px;align-items:start}
+  .steps{position:sticky;top:20px;list-style:none;margin:0;padding:0}
+  .steps li{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;color:var(--muted);font-size:15.5px;cursor:default}
+  .steps li .dot{width:24px;height:24px;border-radius:50%;border:2px solid #CBD5E1;display:grid;place-items:center;font-size:12.5px;font-weight:700;flex:none;background:#fff}
+  .steps li.done{color:var(--ink);cursor:pointer}
+  .steps li.done .dot{background:var(--teal);border-color:var(--teal);color:#fff}
+  .steps li.cur{background:#fff;color:var(--teal-dark);font-weight:700;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+  .steps li.cur .dot{border-color:var(--teal);color:var(--teal)}
+
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:0 1px 3px rgba(15,23,42,.06),0 8px 28px rgba(15,23,42,.05);padding:34px 36px;min-width:0}
+  .eyebrow{font-size:13.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+  h1{font-size:30px;line-height:1.2;margin:6px 0 8px;color:var(--teal-dark)}
+  h2{font-size:26px;line-height:1.25;margin:4px 0 6px;color:var(--teal-dark)}
+  .intro{color:var(--muted);margin:0 0 22px}
+
+  .field{margin:0 0 22px}
+  .field>label.q,.field>.q{display:block;font-weight:700;margin-bottom:6px}
+  .req{color:var(--teal);margin-left:2px}
+  .help{display:block;font-weight:400;color:var(--muted);font-size:15px;margin-top:-3px;margin-bottom:8px}
+  input[type=text],input[type=email],input[type=tel],input[type=url],input[type=number],select,textarea{
+    width:100%;font:inherit;padding:11px 13px;border:1.5px solid #CBD5E1;border-radius:10px;background:#fff;color:var(--ink);transition:border-color .15s, box-shadow .15s}
+  textarea{min-height:92px;resize:vertical}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,118,110,.15)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{position:relative;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1.5px solid #CBD5E1;border-radius:999px;background:#fff;cursor:pointer;font-size:16px;user-select:none;transition:all .12s}
+  .chip:hover{border-color:var(--teal)}
+  .chip input{position:absolute;opacity:0;pointer-events:none}
+  .chip:has(input:checked){background:var(--teal);border-color:var(--teal);color:#fff}
+  .chip:has(input:focus-visible){box-shadow:0 0 0 3px rgba(15,118,110,.25)}
+  .opts{display:grid;gap:10px}
+  .opt{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1.5px solid #CBD5E1;border-radius:12px;cursor:pointer;background:#fff;transition:all .12s}
+  .opt:hover{border-color:var(--teal)}
+  .opt input{margin-top:4px;accent-color:var(--teal);width:18px;height:18px;flex:none}
+  .opt:has(input:checked){border-color:var(--teal);background:var(--teal-50);box-shadow:inset 0 0 0 1px var(--teal)}
+  .opt b{display:block}
+  .opt span{color:var(--muted);font-size:15px}
+  .other-in{margin-top:10px}
+
+  .teams{width:100%;border-collapse:separate;border-spacing:0;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+  .teams th{background:var(--teal-50);text-align:left;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--teal-dark);padding:10px 12px}
+  .teams td{padding:8px 12px;border-top:1px solid var(--line);vertical-align:middle}
+  .teams td:first-child{font-weight:600}
+  .teams input[type=number]{width:90px;padding:8px 10px}
+  .teams select{padding:8px 10px}
+
+  .err-msg{color:var(--err);font-size:15px;margin-top:6px;display:none}
+  .field.invalid .err-msg{display:block}
+  .field.invalid input,.field.invalid textarea,.field.invalid select{border-color:var(--err)}
+  .field.invalid .chips .chip,.field.invalid .opt{border-color:#FCA5A5}
+
+  .nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:30px;padding-top:22px;border-top:1px solid var(--line)}
+  .btn{font:inherit;font-weight:700;border:0;border-radius:10px;padding:12px 22px;cursor:pointer;transition:background .15s, transform .05s}
+  .btn:active{transform:translateY(1px)}
+  .btn-p{background:var(--teal);color:#fff}
+  .btn-p:hover{background:var(--teal-700)}
+  .btn-p[disabled]{opacity:.6;cursor:wait}
+  .btn-g{background:transparent;color:var(--muted)}
+  .btn-g:hover{color:var(--ink);background:#F1F5F9}
+  .saved{font-size:14px;color:var(--muted)}
+
+  .welcome-list{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 6px}
+  .wl{background:var(--teal-50);border:1px solid var(--teal-100);border-radius:12px;padding:16px}
+  .wl b{display:block;color:var(--teal-dark);font-size:17px}
+  .wl span{color:var(--muted);font-size:15px}
+  .note{background:#F8FAFC;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;padding:12px 16px;color:var(--muted);font-size:15.5px;margin-top:18px}
+
+  .rev-sec{border:1px solid var(--line);border-radius:12px;margin-bottom:14px;overflow:hidden}
+  .rev-sec header{display:flex;justify-content:space-between;align-items:center;background:var(--teal-50);padding:10px 16px;font-weight:700;color:var(--teal-dark)}
+  .rev-sec header button{font:inherit;font-size:15px;background:none;border:0;color:var(--teal);cursor:pointer;font-weight:700}
+  .rev-sec dl{margin:0;padding:6px 16px 12px;display:grid;grid-template-columns:minmax(160px,38%) 1fr;gap:8px 16px}
+  .rev-sec dt{color:var(--muted);font-size:15px}
+  .rev-sec dd{margin:0;white-space:pre-wrap;word-break:break-word}
+  .rev-empty{padding:10px 16px;color:var(--muted);font-size:15px}
+
+  .thanks{text-align:center;padding:30px 10px}
+  .check{width:72px;height:72px;border-radius:50%;background:var(--teal-50);display:grid;place-items:center;margin:0 auto 14px;border:2px solid var(--teal)}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+  footer{text-align:center;color:var(--muted);font-size:14px;padding:10px 20px 36px}
+
+  @media (max-width:900px){
+    .wrap{grid-template-columns:1fr;padding:18px 16px 30px;gap:14px}
+    .steps{display:none}
+    .card{padding:24px 18px}
+    .grid2{grid-template-columns:1fr}
+    .welcome-list{grid-template-columns:1fr}
+    h1{font-size:25px} h2{font-size:22px}
+    .rev-sec dl{grid-template-columns:1fr;gap:2px}
+    .rev-sec dd{margin-bottom:8px}
+    .teams thead{display:none}
+    .teams,.teams tbody,.teams tr,.teams td{display:block;width:100%}
+    .teams tr{border-top:1px solid var(--line);padding:10px 12px;display:grid !important;grid-template-columns:90px 1fr;gap:4px 10px}
+    .teams td:first-child{grid-column:1 / -1}
+    .teams tr:first-child{border-top:0}
+    .teams td{border:0;padding:3px 0}
+    .teams td[data-l]::before{content:attr(data-l);display:block;font-size:13px;color:var(--muted)}
+    .teams input[type=number]{width:100%}
+  }
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-in">
+    <div class="mark" aria-hidden="true">SC</div>
+    <div class="brand">Santagata Consulting<small>Salesforce Discovery Questionnaire</small></div>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+</div>
+
+<div class="wrap">
+  <ol class="steps" id="steps" aria-label="Sections"></ol>
+  <main class="card" id="card" aria-live="polite"></main>
+</div>
+
+<footer>&copy; <span id="yr"></span> Santagata Consulting LLC &middot; Salesforce &amp; Contact Center Consulting for Healthcare</footer>
+
+<script>
+/* =========================================================
+   CONFIG: paste your Google Apps Script Web App URL below.
+   Leave blank to run in preview mode (nothing is sent).
+   ========================================================= */
+const CONFIG = {
+  SCRIPT_URL: "https://script.google.com/macros/s/AKfycbwJfKTxOmkpeydKBAA2YULPRWOV2bvgR0HlkoOrZQqZ-k7SZkeujxOCWJ-vEjc-fYWc/exec",
+  CONTACT_EMAIL: "m@santagataconsulting.com",
+  STORAGE_KEY: "sc-sf-discovery-v1"
+};
+
+/* ---------- Questionnaire definition ----------
+   Field types: text, email, tel, url, number, textarea, select,
+   radio (chips), cards (large radio), checkbox (chips), teams
+   showIf: { f: "fieldName", in: ["value", ...] }
+------------------------------------------------ */
+const YES_CONNECT = ["Yes", "No, but we'd like it to be", "No, and not needed", "Not sure"];
+const BH = ["Behavioral health"];
+
+const STEPS = [
+  { id:"welcome", title:"Welcome", welcome:true },
+
+  { id:"contact", title:"About you", intro:"So we know who we're talking to.", fields:[
+    { name:"org_name", label:"Organization name", type:"text", required:true, half:true },
+    { name:"contact_name", label:"Your name", type:"text", required:true, half:true },
+    { name:"contact_title", label:"Your title", type:"text", half:true },
+    { name:"contact_email", label:"Email", type:"email", required:true, half:true }
+  ]},
+
+  { id:"engagement", title:"What you need", intro:"This helps us show you only the questions that apply.", fields:[
+    { name:"engagement", label:"What best describes what you're looking for?", type:"cards", required:true, options:[
+      { v:"New Salesforce implementation", d:"We're moving to Salesforce, or considering it." },
+      { v:"Help with our existing Salesforce", d:"We have Salesforce and need support, improvements, or cleanup." },
+      { v:"Not sure yet", d:"We'd like guidance on the right path." }
+    ]}
+  ]},
+
+  { id:"newimpl", title:"Your current CRM", intro:"Just a couple of questions about where you are today.",
+    showIf:{ f:"engagement", in:["New Salesforce implementation","Not sure yet"] }, fields:[
+    { name:"current_crm", label:"What do you use today to track inquiries or leads?", type:"radio", other:true, options:[
+      "Nothing formal (spreadsheets, email, paper)","Kipu CRM","HubSpot","Zoho","Salesforce (a different org)"
+    ]},
+    { name:"sf_status", label:"Have you already chosen Salesforce?", type:"radio", options:[
+      "Yes, we've purchased it","Yes, but not purchased yet","Still deciding"
+    ]},
+    { name:"migrate", label:"Will you want existing data moved into Salesforce?", type:"radio", options:["Yes","No","Not sure"] }
+  ]},
+
+  { id:"existing", title:"Your Salesforce today", intro:"Just a couple of questions about your current setup.",
+    showIf:{ f:"engagement", in:["Help with our existing Salesforce"] }, fields:[
+    { name:"admin", label:"Do you have someone in-house who manages Salesforce?", type:"radio", options:["Yes","No","Sort of"] },
+    { name:"support_needs", label:"What would you like help with?", type:"checkbox", help:"Select any that apply.", options:[
+      "Fixing things that aren't working","New features","Automation","Reports and dashboards","Training","Integrations","Cleanup"
+    ]},
+    { name:"known_issues", label:"What's frustrating about Salesforce today?", type:"textarea" }
+  ]},
+
+  { id:"org", title:"Your organization", intro:"The basics about your organization and who will use Salesforce.", fields:[
+    { name:"industry", label:"What type of organization are you?", type:"radio", options:[
+      "Behavioral health","Dermatology","Ophthalmology / eye care","Dental / orthodontics","Other healthcare","Other industry"
+    ]},
+    { name:"industry_detail", label:"What type?", type:"text", showIf:{ f:"industry", in:["Other healthcare","Other industry"] } },
+    { name:"levels_of_care", label:"Levels of care offered", type:"checkbox", showIf:{ f:"industry", in:BH }, options:[
+      "Detox","Residential","PHP","IOP","Outpatient","Medication management"
+    ]},
+    { name:"location_count", label:"How many locations?", type:"number", half:true },
+    { name:"states", label:"Which states?", type:"text", half:true },
+    { name:"teams", label:"Which teams will use Salesforce, and about how many people?", type:"textarea",
+      placeholder:"For example: Admissions (6), BD reps (4), Utilization review (2)" }
+  ]},
+
+  { id:"systems", title:"Your systems", intro:"Your phone system and EHR, and whether they connect to your CRM.", fields:[
+    { name:"phone_system", label:"What phone system do you use?", type:"radio", other:true, options:[
+      "CTM (CallTrackingMetrics)","Five9","RingCentral","8x8","Nextiva","Dialpad","Not sure"
+    ]},
+    { name:"phone_connected", label:"Is it connected to your CRM?", type:"radio", options:YES_CONNECT },
+    { name:"ehr", label:"What EHR do you use?", type:"radio", other:true, options:[
+      "Kipu","Sunwave","Lightning Step","BestNotes","Alleva","ModMed","Nextech","None"
+    ]},
+    { name:"ehr_connected", label:"Is it connected to your CRM?", type:"radio", options:YES_CONNECT },
+    { name:"other_systems", label:"Any other tools you'd like connected?", type:"text", placeholder:"For example: website forms, DocuSign, billing software" }
+  ]},
+
+  { id:"goals", title:"Goals & timing", intro:"This is what we'll spend our call on.", fields:[
+    { name:"top_goals", label:"What are the top things you want Salesforce to do for you?", type:"textarea", required:true },
+    { name:"pain_points", label:"Do any of these sound familiar?", type:"checkbox", help:"Optional. Select any that apply.", options:[
+      "Leads fall through the cracks","Hard to track referral sources","Too much manual data entry","Reports are hard to get",
+      "Phones and CRM don't talk","Leadership lacks visibility"
+    ]},
+    { name:"timeline", label:"When would you like to get started?", type:"radio", options:["As soon as possible","In the next few months","No set date"] },
+    { name:"anything_else", label:"Anything else we should know?", type:"textarea" }
+  ]},
+
+  { id:"review", title:"Review & submit", review:true }
+];
+
+/* ---------- State ---------- */
+let data = {};
+let cur = 0;
+let submitted = false;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"");
+
+function load(){
+  try { const s = localStorage.getItem(CONFIG.STORAGE_KEY); if (s){ const o = JSON.parse(s); data = o.data || {}; cur = o.cur || 0; } } catch(e){}
+  const p = new URLSearchParams(location.search);
+  if (p.get("org")) data.org_name = data.org_name || p.get("org");
+  if (p.get("name")) data.contact_name = data.contact_name || p.get("name");
+  if (p.get("email")) data.contact_email = data.contact_email || p.get("email");
+}
+function save(){ try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({ data, cur })); } catch(e){} }
+function clearSaved(){ try { localStorage.removeItem(CONFIG.STORAGE_KEY); } catch(e){} }
+
+function cond(c){
+  if (!c) return true;
+  const v = data[c.f];
+  if (Array.isArray(v)) return v.some(x => c.in.includes(x));
+  return c.in.includes(v);
+}
+const visibleSteps = () => STEPS.filter(s => cond(s.showIf));
+const fieldVisible = (f) => cond(f.showIf);
+
+/* ---------- Rendering ---------- */
+function renderSteps(){
+  const vs = visibleSteps();
+  $("#steps").innerHTML = vs.map((s,i) => {
+    const cls = i === cur ? "cur" : (i < cur ? "done" : "");
+    const mark = i < cur ? "&#10003;" : (i === 0 ? "&#9679;" : i);
+    return `<li class="${cls}" data-i="${i}"><span class="dot">${mark}</span>${esc(s.title)}</li>`;
+  }).join("");
+  $("#steps").querySelectorAll("li.done").forEach(li => li.onclick = () => go(+li.dataset.i));
+  const pct = submitted ? 100 : Math.round((cur / (vs.length - 1)) * 100);
+  $("#bar").style.width = pct + "%";
+}
+
+function fieldHTML(f){
+  const req = f.required ? '<span class="req" aria-hidden="true">*</span>' : "";
+  const help = f.help ? `<span class="help">${esc(f.help)}</span>` : "";
+  const v = data[f.name];
+  let inner = "";
+  const id = "f_" + f.name;
+
+  if (["text","email","tel","url","number"].includes(f.type)){
+    inner = `<label class="q" for="${id}">${esc(f.label)}${req}</label>${help}
+      <input id="${id}" name="${f.name}" type="${f.type}" ${f.type==="number"?'min="0" inputmode="numeric"':""} value="${esc(v)}" placeholder="${esc(f.placeholder||"")}" ${f.type==="email"?'autocomplete="email"':""}>`;
+  } else if (f.type === "textarea"){
+    inner = `<label class="q" for="${id}">${esc(f.label)}${req}</label>${help}<textarea id="${id}" name="${f.name}" placeholder="${esc(f.placeholder||"")}">${esc(v)}</textarea>`;
+  } else if (f.type === "cards"){
+    inner = `<div class="q" id="${id}_l">${esc(f.label)}${req}</div>${help}<div class="opts" role="radiogroup" aria-labelledby="${id}_l">` +
+      f.options.map(o => `<label class="opt"><input type="radio" name="${f.name}" value="${esc(o.v)}" ${v===o.v?"checked":""}><div><b>${esc(o.v)}</b><span>${esc(o.d)}</span></div></label>`).join("") + `</div>`;
+  } else if (f.type === "radio" || f.type === "checkbox"){
+    const opts = f.other ? [...f.options, "Other"] : f.options;
+    const isC = f.type === "checkbox";
+    const sel = o => isC ? (Array.isArray(v) && v.includes(o)) : v === o;
+    inner = `<div class="q" id="${id}_l">${esc(f.label)}${req}</div>${help}<div class="chips" role="${isC?"group":"radiogroup"}" aria-labelledby="${id}_l">` +
+      opts.map(o => `<label class="chip"><input type="${f.type}" name="${f.name}" value="${esc(o)}" ${sel(o)?"checked":""}>${esc(o)}</label>`).join("") + `</div>`;
+    if (f.other){
+      const show = isC ? (Array.isArray(v) && v.includes("Other")) : v === "Other";
+      inner += `<input class="other-in" type="text" name="${f.name}_other" aria-label="Other, please specify" placeholder="Please specify" value="${esc(data[f.name+"_other"])}" style="display:${show?"block":"none"}">`;
+    }
+  } else if (f.type === "teams"){
+    const st = ["","Uses CRM today","Want in CRM","Not needed","Not sure"];
+    inner = `<table class="teams"><thead><tr><th>Team</th><th>People</th><th>CRM status</th></tr></thead><tbody>` +
+      f.rows.map(r => {
+        const k = "team_" + slug(r);
+        return `<tr><td>${esc(r)}</td>
+          <td data-l="People"><input type="number" min="0" inputmode="numeric" name="${k}_count" aria-label="${esc(r)} headcount" value="${esc(data[k+"_count"])}"></td>
+          <td data-l="CRM status"><select name="${k}_crm" aria-label="${esc(r)} CRM status">${st.map(o=>`<option value="${o}" ${data[k+"_crm"]===o?"selected":""}>${o||"Select"}</option>`).join("")}</select></td></tr>`;
+      }).join("") + `</tbody></table>`;
+  }
+  return `<div class="field${f.half?" half":""}" data-f="${f.name}" style="display:${fieldVisible(f)?"":"none"}">${inner}<div class="err-msg">${f.type==="email"?"Please enter a valid email.":"This one's required."}</div></div>`;
+}
+
+function groupHalves(fields){
+  let out = "", buf = [];
+  const flush = () => { if (buf.length){ out += `<div class="grid2">${buf.join("")}</div>`; buf = []; } };
+  fields.forEach(f => { if (f.half) buf.push(fieldHTML(f)); else { flush(); out += fieldHTML(f); } });
+  flush();
+  return out;
+}
+
+function render(){
+  const vs = visibleSteps();
+  if (cur >= vs.length) cur = vs.length - 1;
+  const s = vs[cur];
+  renderSteps();
+  const mstep = "";
+  let h = "";
+
+  if (submitted){
+    h = `<div class="thanks"><div class="check"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h1>Thank you${data.contact_name?", "+esc(data.contact_name.split(" ")[0]):""}!</h1>
+      <p class="intro" style="max-width:520px;margin:0 auto">We've received your answers and will review them before our call, so we can spend our time on your goals instead of the basics.</p>
+      <p class="intro" style="margin-top:14px">Questions in the meantime? Email <a href="mailto:${CONFIG.CONTACT_EMAIL}">${CONFIG.CONTACT_EMAIL}</a>.</p>
+      ${!CONFIG.SCRIPT_URL?'<div class="note">Preview mode: responses are not being sent. Add your Apps Script URL in CONFIG to go live.</div>':""}</div>`;
+    $("#card").innerHTML = h; return;
+  }
+
+  if (s.welcome){
+    h = `${mstep}<div class="eyebrow">Before we meet</div><h1>Let's make our discovery call count</h1>
+      <p class="intro">A few questions up front means we can skip the fact gathering and spend our call on your goals, your team, and what success looks like for you.</p>
+      <div class="welcome-list">
+        <div class="wl"><b>About 5 minutes</b><span>You'll only see questions that apply to you.</span></div>
+        <div class="wl"><b>Skip what you don't know</b><span>Only a few questions are required.</span></div>
+        <div class="wl"><b>Progress saves</b><span>Come back on this device and pick up where you left off.</span></div>
+      </div>
+      <div class="note">Please don't include any patient information. We only need details about your organization and systems.</div>
+      <div class="nav"><span class="saved"></span><button class="btn btn-p" id="next">Get started &rarr;</button></div>`;
+  } else if (s.review){
+    h = `${mstep}<div class="eyebrow">Almost done</div><h2>Review your answers</h2><p class="intro">Take a quick look, then submit. You can edit any section.</p>` + reviewHTML() +
+      `<div class="hp" aria-hidden="true"><label>Leave blank<input type="text" id="hp_field" tabindex="-1" autocomplete="off"></label></div>
+      <div class="nav"><button class="btn btn-g" id="back">&larr; Back</button><button class="btn btn-p" id="submit">Submit questionnaire</button></div>
+      <div class="err-msg" id="sub-err" style="text-align:right"></div>`;
+  } else {
+    h = `${mstep}<div class="eyebrow">Step ${cur} of ${vs.length-1}</div><h2>${esc(s.title)}</h2><p class="intro">${esc(s.intro||"")}</p>
+      <form id="stepform" novalidate>${groupHalves(s.fields)}</form>
+      <div class="nav"><button class="btn btn-g" id="back">&larr; Back</button><span class="saved" id="saved"></span><button class="btn btn-p" id="next">Continue &rarr;</button></div>`;
+  }
+  $("#card").innerHTML = h;
+  bind(s);
+}
+
+function reviewHTML(){
+  const vs = visibleSteps();
+  return vs.filter(s => s.fields).map(s => {
+    const rows = collectRows(s).filter(r => r.value !== "");
+    const i = vs.indexOf(s);
+    return `<section class="rev-sec"><header>${esc(s.title)}<button data-go="${i}">Edit</button></header>` +
+      (rows.length ? `<dl>${rows.map(r => `<dt>${esc(r.label)}</dt><dd>${esc(r.value)}</dd>`).join("")}</dl>` : `<div class="rev-empty">No answers</div>`) + `</section>`;
+  }).join("");
+}
+
+function collectRows(s){
+  const rows = [];
+  s.fields.forEach(f => {
+    if (!fieldVisible(f)) return;
+    if (f.type === "teams"){
+      f.rows.forEach(r => {
+        const k = "team_" + slug(r);
+        const c = data[k+"_count"], st = data[k+"_crm"];
+        if (c || st) rows.push({ key:k, section:s.title, label:"Team: " + r, value:[c ? c + " people" : "", st].filter(Boolean).join(", ") });
+      });
+      return;
+    }
+    let v = data[f.name];
+    if (Array.isArray(v)) v = v.map(x => x === "Other" && data[f.name+"_other"] ? "Other: " + data[f.name+"_other"] : x).join(", ");
+    else if (v === "Other" && data[f.name+"_other"]) v = "Other: " + data[f.name+"_other"];
+    rows.push({ key:f.name, section:s.title, label:f.label, value:(v ?? "").toString().trim() });
+  });
+  return rows;
+}
+
+function refreshVisibility(s){
+  s.fields.forEach(f => {
+    const el = document.querySelector(`.field[data-f="${f.name}"]`);
+    if (el) el.style.display = fieldVisible(f) ? "" : "none";
+    if (f.other){
+      const o = document.querySelector(`input[name="${f.name}_other"]`);
+      const v = data[f.name];
+      if (o) o.style.display = (Array.isArray(v) ? v.includes("Other") : v === "Other") ? "block" : "none";
+    }
+  });
+  renderSteps();
+}
+
+let savedT;
+function bind(s){
+  const next = $("#next"), back = $("#back"), sub = $("#submit");
+  if (next) next.onclick = () => { if (!s.fields || validate(s)) go(cur + 1); };
+  if (back) back.onclick = () => go(cur - 1);
+  if (sub) sub.onclick = submit;
+  document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(+b.dataset.go));
+  const form = $("#stepform");
+  if (!form) return;
+  form.addEventListener("submit", e => { e.preventDefault(); next.click(); });
+  form.addEventListener("input", e => {
+    const t = e.target, n = t.name; if (!n) return;
+    if (t.type === "checkbox"){
+      data[n] = [...form.querySelectorAll(`input[name="${n}"]:checked`)].map(x => x.value);
+    } else if (t.type === "radio"){
+      data[n] = t.value;
+    } else data[n] = t.value;
+    const fe = t.closest(".field"); if (fe) fe.classList.remove("invalid");
+    refreshVisibility(s);
+    save();
+    clearTimeout(savedT); const sv = $("#saved"); if (sv){ sv.textContent = "Saved"; savedT = setTimeout(() => sv.textContent = "", 1400); }
+  });
+  // radios: allow deselecting a chip radio by clicking it again
+  form.querySelectorAll('.chip input[type=radio]').forEach(r => {
+    const lab = r.closest("label");
+    lab.addEventListener("pointerdown", () => r.dataset.was = r.checked ? "1" : "");
+    lab.addEventListener("click", ev => {
+      if (r.dataset.was === "1" && !s.fields.find(f=>f.name===r.name)?.required){ ev.preventDefault(); r.checked = false; r.dataset.was = ""; data[r.name] = ""; refreshVisibility(s); save(); }
+    });
+  });
+}
+
+function validate(s){
+  let ok = true, first = null;
+  s.fields.forEach(f => {
+    if (!fieldVisible(f)) return;
+    const el = document.querySelector(`.field[data-f="${f.name}"]`);
+    const v = data[f.name];
+    let bad = f.required && (v === undefined || v === "" || (Array.isArray(v) && !v.length));
+    if (!bad && f.type === "email" && v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) bad = true;
+    if (el) el.classList.toggle("invalid", !!bad);
+    if (bad){ ok = false; first = first || el; }
+  });
+  if (first) first.scrollIntoView({ behavior:"smooth", block:"center" });
+  return ok;
+}
+
+function go(i){
+  const vs = visibleSteps();
+  cur = Math.max(0, Math.min(i, vs.length - 1));
+  save(); render();
+  window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+async function submit(){
+  const btn = $("#submit"), err = $("#sub-err");
+  if ($("#hp_field") && $("#hp_field").value){ submitted = true; render(); return; }
+  const vs = visibleSteps();
+  const rows = vs.filter(s => s.fields).flatMap(collectRows);
+  const payload = {
+    submitted_at: new Date().toISOString(),
+    org_name: data.org_name || "",
+    contact_name: data.contact_name || "",
+    contact_email: data.contact_email || "",
+    engagement: data.engagement || "",
+    rows
+  };
+  btn.disabled = true; btn.textContent = "Submitting...";
+  try {
+    if (CONFIG.SCRIPT_URL){
+      const r = await fetch(CONFIG.SCRIPT_URL, { method:"POST", headers:{ "Content-Type":"text/plain;charset=utf-8" }, body:JSON.stringify(payload) });
+      const j = await r.json().catch(() => ({ ok:true }));
+      if (j.ok === false) throw new Error(j.error || "Submission failed");
+    } else {
+      console.log("[Preview mode] Payload:", payload);
+      await new Promise(r => setTimeout(r, 500));
+    }
+    submitted = true; clearSaved(); render();
+  } catch(e){
+    btn.disabled = false; btn.textContent = "Submit questionnaire";
+    err.style.display = "block";
+    err.innerHTML = `Something went wrong sending your answers. Please try again, or email <a href="mailto:${CONFIG.CONTACT_EMAIL}">${CONFIG.CONTACT_EMAIL}</a>. Your answers are still saved.`;
+  }
+}
+
+document.getElementById("yr").textContent = new Date().getFullYear();
+load(); render();
+</script>
+</body>
+</html>
